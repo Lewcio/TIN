@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="css/style.css">
+    <script type="application/javascript" src="js/validationCommon.js"></script>
+    <script type="application/javascript" src="js/validationDruzynyForm.js"></script>
     <title>Formula 1</title>
 </head>
 <body>
@@ -21,14 +23,21 @@
     </nav>
     <main>
         <h2>Nowa drużyna</h2>
-        <form class="form">
-                <label for="nazwa">Nazwa</label>
-                <input type="text" name="nazwa" id="nazwa" />
-                <label for="narodowosc">Narodowość</label>
-                <input type="text" name="narodowosc" id="narodowosc" />
-                <label for="rok">Rok założenia</label>
-                <input type="date" name="rok" id="rok" />
+        <form class="form" novalidate onsubmit="return validateForm();">
+            <label for="nazwa">Nazwa<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="nazwa" id="nazwa" placeholder="2-60 znaków" />
+            <span id="errorNazwa" class="errors-text"></span>
+
+            <label for="narodowosc">Narodowość<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="narodowosc" id="narodowosc" placeholder="2-60 znaków" />
+            <span id="errorNarodowosc" class="errors-text"></span>
+
+            <label for="data">Data założenia<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="date" name="data" id="data" />
+            <span id="errorData" class="errors-text"></span>
+
             <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
                 <input type="submit" class="form-button-submit" value="Dodaj">
                 <a href="" class="form-button-cancel">Anuluj</a>
             </div>

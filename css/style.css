@@ -201,7 +201,8 @@ main h2 {
 .form {
     margin-left: 2rem;
     display: grid;
-    grid-template-columns: 150px 300px;
+    grid-template-columns: 150px 300px 1fr;
+    column-gap: 1rem;
     row-gap: 1rem;
 }
 
@@ -228,8 +229,20 @@ main h2 {
 
 .form-buttons {
     margin-top: 2rem;
-    grid-column-start: 1;
-    grid-column-end: -1;
+    grid-column: 1 / span 2;
+}
+
+/* Validaton */
+
+.errors-text {
+    color: #c0392b;
+    font-size: 0.85em;
+    line-height: 2.25rem;
+}
+
+.form input.error-input,
+.form select.error-input {
+    border: 3px solid #e74c3c
 }
 
 abbr[title='required'] {
@@ -287,12 +300,20 @@ textarea {
         margin-left: unset;
     }
 
-    .form input[type="text"],
-    .form input[type="number"],
-    .form input[type="date"],
-    .form select {
+    .form .errors-text {
         margin-bottom: 1rem;
     }
+
+    .form-buttons {
+        grid-column: 1 / span 1;
+    }
+
+    /*.form input[type="text"],*/
+    /*.form input[type="number"],*/
+    /*.form input[type="date"],*/
+    /*.form select {*/
+    /*    margin-bottom: 1rem;*/
+    /*}*/
 
 }
 

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="css/style.css">
+    <script type="application/javascript" src="js/validationCommon.js"></script>
+    <script type="application/javascript" src="js/validationKierowcyForm.js"></script>
     <title>Formula 1</title>
 </head>
 <body>
@@ -21,16 +23,25 @@
     </nav>
     <main>
         <h2>Nowy kierowca</h2>
-        <form class="form">
-            <label for="imie">Imię</label>
-            <input type="text" name="imie" id="imie" />
-            <label for="nazwisko">Nazwisko</label>
-            <input type="text" name="nazwisko" id="nazwisko" />
-            <label for="data">Data urodzenia</label>
+        <form class="form" novalidate onsubmit="return validateForm();">
+            <label for="imie">Imię<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="imie" id="imie" placeholder="2-60 znaków" />
+            <span id="errorImie" class="errors-text"></span>
+
+            <label for="nazwisko">Nazwisko<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="nazwisko" id="nazwisko" placeholder="2-60 znaków" />
+            <span id="errorNazwisko" class="errors-text"></span>
+
+            <label for="data">Data urodzenia<abbr title="required" aria-label="required">*</abbr></label>
             <input type="date" name="data" id="data" />
-            <label for="narodowosc">Narodowość</label>
-            <input type="text" name="narodowosc" id="narodowosc" />
+            <span id="errorData" class="errors-text"></span>
+
+            <label for="narodowosc">Narodowość<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="narodowosc" id="narodowosc" placeholder="2-60 znaków" />
+            <span id="errorNarodowosc" class="errors-text"></span>
+
             <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
                 <input type="submit" class="form-button-submit" value="Dodaj">
                 <a href="" class="form-button-cancel">Anuluj</a>
             </div>

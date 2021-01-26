@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="css/style.css">
+    <script type="application/javascript" src="js/validationCommon.js"></script>
+    <script type="application/javascript" src="js/validationWyscigiForm.js"></script>
     <title>Formula 1</title>
 </head>
 <body>
@@ -21,12 +23,17 @@
     </nav>
     <main>
         <h2>Nowy wyścig</h2>
-        <form class="form">
-            <label for="data">Data</label>
+        <form class="form" novalidate onsubmit="return validateForm();">
+            <label for="data">Data<abbr title="required" aria-label="required">*</abbr></label>
             <input type="date" name="data" id="data" />
-            <label for="okrazenia">Okrążenia</label>
-            <input type="text" name="okrazenia" id="okrazenia" />
+            <span id="errorData" class="errors-text"></span>
+
+            <label for="okrazenia">Okrążenia<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="okrazenia" id="okrazenia" placeholder="ilość" />
+            <span id="errorOkrazenia" class="errors-text"></span>
+
             <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
                 <input type="submit" class="form-button-submit" value="Dodaj">
                 <a href="" class="form-button-cancel">Anuluj</a>
             </div>

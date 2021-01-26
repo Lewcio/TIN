@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="css/style.css">
+    <script type="application/javascript" src="js/validationCommon.js"></script>
+    <script type="application/javascript" src="js/validationToryForm.js"></script>
     <title>Formula 1</title>
 </head>
 <body>
@@ -21,12 +23,17 @@
     </nav>
     <main>
         <h2>Nowy tor</h2>
-        <form class="form">
-            <label for="lokalizacja">Lokalizacja</label>
-            <input type="text" name="lokalizacja" id="lokalizacja" />
-            <label for="dlugosc">Długość</label>
-            <input type="number" name="dlugosc" id="dlugosc" />
+        <form class="form" novalidate onsubmit="return validateForm();">
+            <label for="lokalizacja">Lokalizacja<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="lokalizacja" id="lokalizacja" placeholder="2-60 znaków" />
+            <span id="errorLokalizacja" class="errors-text"></span>
+
+            <label for="dlugosc">Długość<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="number" name="dlugosc" id="dlugosc" placeholder="km" />
+            <span id="errorDlugosc" class="errors-text"></span>
+
             <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
                 <input type="submit" class="form-button-submit" value="Dodaj">
                 <a href="" class="form-button-cancel">Anuluj</a>
             </div>
