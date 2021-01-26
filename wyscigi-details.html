@@ -20,36 +20,32 @@
         </ul>
     </nav>
     <main>
-        <h2>Wyścigi</h2>
+        <h2>Szczegóły wyścigu</h2>
+        <form class="form">
+            <label for="data">Data</label>
+            <input type="date" name="data" id="data" value="29.10" disabled />
+            <label for="okrazenia">Okrążenia</label>
+            <input type="text" name="okrazenia" id="okrazenia" value="44" disabled />
+            <div class="form-buttons">
+                <a href="" class="list-actions-button-edit">Edytuj</a>
+                <a href="" class="list-actions-button-details">Powrót</a>
+            </div>
+        </form>
+        <h2>Szczegóły toru</h2>
         <table class="table-list">
             <thead>
             <tr>
-                <th>Data</th>
-                <th>Okrążenia</th>
-                <th>Akcje</th>
+                <th>Lokalizacja</th>
+                <th>Długość</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>29 sierpnia</td>
-                <td>44</td>
-                <td>
-                    <ul class="list-actions">
-                        <li>
-                            <a href="" class="list-actions-button-details">Szczegóły</a>
-                        </li>
-                        <li>
-                            <a href="" class="list-actions-button-edit">Edytuj</a>
-                        </li>
-                        <li>
-                            <a href="" class="list-actions-button-delete">Usuń</a>
-                        </li>
-                    </ul>
-                </td>
+                <td>Circuit de Spa-Francorchamps</td>
+                <td>7.004 km</td>
             </tr>
             </tbody>
         </table>
-        <p><a href="" class="button-add">Dodaj nowy tor</a></p>
     </main>
     <footer>
         <p>2021 copywrite</p>
