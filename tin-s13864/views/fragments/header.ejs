@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Formula 1</title>
+</head>
+<body>
+<header>
+    <img src="/images/logo.png" alt="F1 logo">
+    <h1>Strona poświęcona wyścigom F1</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="/" class="<%= navLocation == 'main' ? 'active' : '' %>">Strona główna</a></li>
+        <li><a href="/drivers" class="<%= navLocation == 'driver' ? 'active' : '' %>">Kierowcy</a></li>
+        <li><a href="/teams" class="<%= navLocation == 'team' ? 'active' : '' %>">Drużyny</a></li>
+        <li><a href="/races" class="<%= navLocation == 'race' ? 'active' : '' %>">Wyścigi</a></li>
+        <li><a href="/tracks" class="<%= navLocation == 'track' ? 'active' : '' %>">Tory</a></li>
+    </ul>
+</nav>

@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html lang="pl-PL">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="css/style.css">
-    <title>Formula 1</title>
-</head>
-<body>
-    <header>
-        <img src="images/logo.png" alt="F1 logo">
-        <h1>Strona poświęcona wyścigom F1</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="">Wyścigi</a></li>
-            <li><a href="">Kierowcy</a></li>
-            <li><a href="">Drużyny</a></li>
-            <li><a href="">Tory</a></li>
-        </ul>
-    </nav>
+<%- include('./../fragments/header.ejs') %>
     <main>
         <h2>Wszystkie drużyny</h2>
         <table class="table-list">
@@ -53,8 +33,4 @@
         </table>
         <p><a href="" class="button-add">Dodaj nową drużynę</a></p>
     </main>
-    <footer>
-        <p>2021 copywrite</p>
-    </footer>
-</body>
-</html>
+<%- include('./../fragments/footer.ejs') %>

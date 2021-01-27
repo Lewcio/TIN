@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html lang="pl-PL">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="css/style.css">
-    <script type="application/javascript" src="js/validationCommon.js"></script>
-    <script type="application/javascript" src="js/validationWyscigiForm.js"></script>
-    <title>Formula 1</title>
-</head>
-<body>
-    <header>
-        <img src="images/logo.png" alt="F1 logo">
-        <h1>Strona poświęcona wyścigom F1</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="">Wyścigi</a></li>
-            <li><a href="">Kierowcy</a></li>
-            <li><a href="">Drużyny</a></li>
-            <li><a href="">Tory</a></li>
-        </ul>
-    </nav>
+<%- include('./../fragments/header.ejs') %>
     <main>
         <h2>Nowy wyścig</h2>
         <form class="form" novalidate onsubmit="return validateForm();">
@@ -39,8 +17,4 @@
             </div>
         </form>
     </main>
-    <footer>
-        <p>2021 copywrite</p>
-    </footer>
-</body>
-</html>
+<%- include('./../fragments/footer.ejs') %>

@@ -1,38 +1,18 @@
-<!DOCTYPE html>
-<html lang="pl-PL">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="css/style.css">
-    <title>Formula 1</title>
-</head>
-<body>
-    <header>
-        <img src="images/logo.png" alt="F1 logo">
-        <h1>Strona poświęcona wyścigom F1</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="">Wyścigi</a></li>
-            <li><a href="">Kierowcy</a></li>
-            <li><a href="">Drużyny</a></li>
-            <li><a href="">Tory</a></li>
-        </ul>
-    </nav>
+<%- include('./../fragments/header.ejs') %>
     <main>
-        <h2>Tory</h2>
+        <h2>Wyścigi</h2>
         <table class="table-list">
             <thead>
             <tr>
-                <th>Lokalizacja</th>
-                <th>Długość</th>
+                <th>Data</th>
+                <th>Okrążenia</th>
                 <th>Akcje</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>Circuit de Spa-Francorchamps</td>
-                <td>7.004 km</td>
+                <td>29 sierpnia</td>
+                <td>44</td>
                 <td>
                     <ul class="list-actions">
                         <li>
@@ -51,8 +31,4 @@
         </table>
         <p><a href="" class="button-add">Dodaj nowy tor</a></p>
     </main>
-    <footer>
-        <p>2021 copywrite</p>
-    </footer>
-</body>
-</html>
+<%- include('./../fragments/footer.ejs') %>
