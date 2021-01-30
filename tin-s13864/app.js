@@ -9,6 +9,10 @@ const driverRouter = require('./routes/driverRoute');
 const raceRouter = require('./routes/raceRoute');
 const teamRouter = require('./routes/teamRoute');
 const trackRouter = require('./routes/trackRoute');
+const driverApiRouter = require('./routes/api/DriverApiRoute');
+const raceApiRouter = require('./routes/api/RaceApiRoute');
+const teamApiRouter = require('./routes/api/TeamApiRoute');
+const trackApiRouter = require('./routes/api/TrackApiRoute');
 
 var app = express();
 
@@ -27,6 +31,10 @@ app.use('/drivers', driverRouter);
 app.use('/races', raceRouter);
 app.use('/teams', teamRouter);
 app.use('/tracks', trackRouter);
+app.use('/api/drivers', driverApiRouter);
+app.use('/api/races', raceApiRouter);
+app.use('/api/teams', teamApiRouter);
+app.use('/api/tracks', trackApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
