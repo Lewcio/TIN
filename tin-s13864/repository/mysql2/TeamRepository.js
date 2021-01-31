@@ -14,9 +14,10 @@ exports.getTeams = () => {
 
 exports.getTeamById = (teamId) => {
     const query = `SELECT t._id as _id, t.name, t.nationality as teamNationality, t.dateOfCreate, t.colors,
-        d._id as driver_id, d.firstName, d.lastName, d.dateOfBirth, d.nationality as driverNationality, d.team_id
+        d._id as driver_id, d.firstName, d.lastName, d.dateOfBirth, d.nationality as driverNationality, c.dateFrom, c.dateTo
         FROM Team t
-        left join Driver d on d.team_id = t._id
+        left join Contract c on c.team_id = t._id
+        left join Driver d on c._id = d._id 
         where t._id = ?`
     return db.promise().query(query, [teamId])
         .then((results, fields) => {
@@ -40,7 +41,9 @@ exports.getTeamById = (teamId) => {
                         firstName: row.firstName,
                         lastName: row.lastName,
                         dateOfBirth: row.dateOfBirth,
-                        nationality: row.driverNationality
+                        nationality: row.driverNationality,
+                        dateFrom: row.dateFrom,
+                        dateTo: row.dateTo
                     };
                     team.drivers.push(driver);
                 }
@@ -72,6 +75,10 @@ exports.updateTeam = (teamId, teamData) => {
 };
 
 exports.deleteTeam = (teamId) => {
-    const sql = 'DELETE FROM Team where _id = ?';
-    return db.promise().execute(sql, [teamId]);
+    const sql1 = 'DELETE FROM Driver where team_id = ?';
+    const sql2 = 'DELETE FROM Team where _id = ?';
+    return db.promise().execute(sql1, [teamId])
+        .then(() => {
+            return db.promise().execute(sql2, [teamId])
+        });
 };

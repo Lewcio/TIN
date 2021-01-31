@@ -1,13 +1,13 @@
 function validateForm() {
-    const imieInput = document.getElementById("imie");
-    const nazwiskoInput = document.getElementById("nazwisko");
-    const dataInput = document.getElementById("data");
-    const narodowoscInput = document.getElementById("narodowosc");
+    const imieInput = document.getElementById("firstName");
+    const nazwiskoInput = document.getElementById("lastName");
+    const dataInput = document.getElementById("dateOfBirth");
+    const narodowoscInput = document.getElementById("nationality");
 
-    const errorImie = document.getElementById("errorImie");
-    const errorNazwisko = document.getElementById("errorNazwisko");
-    const errorData = document.getElementById("errorData");
-    const errorNarodowosc = document.getElementById("errorNarodowosc");
+    const errorImie = document.getElementById("errorFirstName");
+    const errorNazwisko = document.getElementById("errorLastName");
+    const errorData = document.getElementById("errorDateOfBirth");
+    const errorNarodowosc = document.getElementById("errorNationality");
     const errorsSummary = document.getElementById("errorsSummary");
 
     resetErrors([imieInput, nazwiskoInput, dataInput, narodowoscInput], [errorImie, errorNazwisko, errorData, errorNarodowosc], errorsSummary);

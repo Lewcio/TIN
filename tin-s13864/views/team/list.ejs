@@ -11,26 +11,28 @@
                 </tr>
             </thead>
             <tbody>
+            <% for (let team of teams) { %>
                 <tr>
-                    <td>Scuderia Ferrari</td>
-                    <td>Włochy</td>
-                    <td>1929</td>
+                    <td><%= team.name %></td>
+                    <td><%= team.nationality %></td>
+                    <td><%= team.dateOfCreate.toISOString().split('T')[0] %></td>
                     <td>
                         <ul class="list-actions">
                             <li>
-                                <a href="" class="list-actions-button-details">Szczegóły</a>
+                                <a href="/teams/details/<%=team._id%>" class="list-actions-button-details">Szczegóły</a>
                             </li>
                             <li>
-                                <a href="" class="list-actions-button-edit">Edytuj</a>
+                                <a href="/teams/edit/<%=team._id%>" class="list-actions-button-edit">Edytuj</a>
                             </li>
                             <li>
-                                <a href="" class="list-actions-button-delete">Usuń</a>
+                                <a href="/teams/delete/<%=team._id%>" class="list-actions-button-delete">Usuń</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+            <% } %>
             </tbody>
         </table>
-        <p><a href="" class="button-add">Dodaj nową drużynę</a></p>
+        <p><a href="teams/add" class="button-add">Dodaj nową drużynę</a></p>
     </main>
 <%- include('./../fragments/footer.ejs') %>

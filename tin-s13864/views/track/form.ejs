@@ -1,20 +1,57 @@
 <%- include('./../fragments/header.ejs') %>
     <main>
-        <h2>Nowy tor</h2>
-        <form class="form" novalidate onsubmit="return validateForm();">
-            <label for="lokalizacja">Lokalizacja<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="lokalizacja" id="lokalizacja" placeholder="2-60 znaków" />
-            <span id="errorLokalizacja" class="errors-text"></span>
+        <script type="application/javascript" src="/js/validationTrackForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%= formAction %>" novalidate onsubmit="return validateForm();">
+            <input type="hidden" name="_id" value="<%= track._id %>">
 
-            <label for="dlugosc">Długość<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="number" name="dlugosc" id="dlugosc" placeholder="km" />
-            <span id="errorDlugosc" class="errors-text"></span>
+            <label for="location">Lokalizacja<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="location" id="location" placeholder="2-60 znaków" value="<%= track.location ? track.location : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorLocation" class="errors-text"></span>
+
+            <label for="length">Długość<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="number" name="length" id="length" placeholder="km" value="<%= track.length ? track.length : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorLength" class="errors-text"></span>
 
             <div class="form-buttons">
                 <p id="errorsSummary" class="errors-text"></p>
-                <input type="submit" class="form-button-submit" value="Dodaj">
-                <a href="" class="form-button-cancel">Anuluj</a>
+                <% if (formMode != 'showDetails') { %>
+                    <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+                    <a class="form-button-cancel" href="/tracks">Anuluj</a>
+                <% } else { %>
+                    <a class="form-button-cancel" href="/tracks">Powrót</a>
+                <% } %>
             </div>
         </form>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="section-buttons">
+                <a href="/tracks/edit/<%= track._id %>" class="button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+            <h2>
+                Wyścigi
+            </h2>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Data</th>
+                    <th>Okrążenia</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (let race of track.races) { %>
+                    <tr>
+                        <td><a href="/races/details/<%= race._id %>"><%= race.name %></a></td>
+                        <td><%= race.date.toISOString().split('T')[0] %></td>
+                        <td><%= race.laps %></td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        <% } %>
     </main>
 <%- include('./../fragments/footer.ejs') %>

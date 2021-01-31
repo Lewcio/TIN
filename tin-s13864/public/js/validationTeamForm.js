@@ -1,14 +1,16 @@
 function validateForm() {
-    const nazwaInput = document.getElementById("nazwa");
-    const narodowoscInput = document.getElementById("narodowosc");
-    const dataInput = document.getElementById("data");
+    const nazwaInput = document.getElementById("name");
+    const narodowoscInput = document.getElementById("nationality");
+    const dataInput = document.getElementById("dateOfCreate");
+    const colorsInput = document.getElementById("colors");
 
-    const errorNazwa = document.getElementById("errorNazwa");
-    const errorNarodowosc = document.getElementById("errorNarodowosc");
-    const errorData = document.getElementById("errorData");
+    const errorNazwa = document.getElementById("errorName");
+    const errorNarodowosc = document.getElementById("errorNationality");
+    const errorData = document.getElementById("errorDateOfCreate");
+    const errorColors = document.getElementById("errorColors");
     const errorsSummary = document.getElementById("errorsSummary");
 
-    resetErrors([nazwaInput, narodowoscInput, dataInput], [errorNazwa, errorNarodowosc, errorData], errorsSummary);
+    resetErrors([nazwaInput, narodowoscInput, dataInput, colorsInput], [errorNazwa, errorNarodowosc, errorData, errorColors], errorsSummary);
 
     let valid = true;
     let nowDate = new Date(),
@@ -54,6 +56,16 @@ function validateForm() {
         valid = false;
         dataInput.classList.add("error-input");
         errorData.innerText = "Data nie może być z przyszłości";
+    }
+
+    if (!checkRequired(colorsInput.value)) {
+        valid = false
+        colorsInput.classList.add("error-input");
+        errorColors.innerText = "Pole jest wymagane";
+    } else if (!checkTextLengthRange(colorsInput.value, 2, 60)) {
+        valid = false
+        colorsInput.classList.add("error-input");
+        errorColors.innerText = "Pole powinno zawierać od 2 do 60 znaków";
     }
 
     if (!valid) {

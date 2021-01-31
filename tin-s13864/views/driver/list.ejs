@@ -12,25 +12,27 @@
             </tr>
             </thead>
             <tbody>
+            <% for (let driver of drivers) { %>
             <tr>
-                <td>Charles</td>
-                <td>Leclerc</td>
-                <td>1997</td>
-                <td>Monako</td>
+                <td><%= driver.firstName %></td>
+                <td><%= driver.lastName %></td>
+                <td><%= driver.dateOfBirth.toISOString().split('T')[0] %></td>
+                <td><%= driver.nationality %></td>
                 <td>
                     <ul class="list-actions">
                         <li>
-                            <a href="" class="list-actions-button-details">Szczegóły</a>
+                            <a href="/drivers/details/<%=driver._id%>" class="list-actions-button-details">Szczegóły</a>
                         </li>
                         <li>
-                            <a href="" class="list-actions-button-edit">Edytuj</a>
+                            <a href="/drivers/edit/<%=driver._id%>" class="list-actions-button-edit">Edytuj</a>
                         </li>
                         <li>
-                            <a href="" class="list-actions-button-delete">Usuń</a>
+                            <a href="/drivers/delete/<%=driver._id%>" class="list-actions-button-delete">Usuń</a>
                         </li>
                     </ul>
                 </td>
             </tr>
+            <% } %>
             </tbody>
         </table>
         <p><a href="drivers/add" class="button-add">Dodaj nowego kierowcę</a></p>

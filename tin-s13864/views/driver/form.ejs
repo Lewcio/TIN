@@ -1,28 +1,78 @@
 <%- include('./../fragments/header.ejs') %>
     <main>
-        <h2>Nowy kierowca</h2>
-        <form class="form" novalidate onsubmit="return validateForm();">
-            <label for="imie">Imię<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="imie" id="imie" placeholder="2-60 znaków" />
-            <span id="errorImie" class="errors-text"></span>
+        <script type="application/javascript" src="/js/validationDriverForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%= formAction %>" novalidate onsubmit="return validateForm();">
+            <input type="hidden" name="_id" value="<%= driver._id %>">
 
-            <label for="nazwisko">Nazwisko<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="nazwisko" id="nazwisko" placeholder="2-60 znaków" />
-            <span id="errorNazwisko" class="errors-text"></span>
+            <label for="firstName">Imię<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="firstName" id="firstName" placeholder="2-60 znaków" value="<%= driver.firstName %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorFirstName" class="errors-text"></span>
 
-            <label for="data">Data urodzenia<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="date" name="data" id="data" />
-            <span id="errorData" class="errors-text"></span>
+            <label for="lastName">Nazwisko<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="lastName" id="lastName" placeholder="2-60 znaków" value="<%= driver.lastName %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorLastName" class="errors-text"></span>
 
-            <label for="narodowosc">Narodowość<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="narodowosc" id="narodowosc" placeholder="2-60 znaków" />
-            <span id="errorNarodowosc" class="errors-text"></span>
+            <label for="dateOfBirth">Data urodzenia<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="date" name="dateOfBirth" id="dateOfBirth" value="<%= driver.dateOfBirth ? driver.dateOfBirth.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorDateOfBirth" class="errors-text"></span>
+
+            <label for="nationality">Narodowość<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="nationality" id="nationality" placeholder="2-60 znaków" value="<%= driver.nationality %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+            <span id="errorNationality" class="errors-text"></span>
 
             <div class="form-buttons">
                 <p id="errorsSummary" class="errors-text"></p>
-                <input type="submit" class="form-button-submit" value="Dodaj">
-                <a href="" class="form-button-cancel">Anuluj</a>
+                <% if (formMode != 'showDetails') { %>
+                    <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+                    <a class="form-button-cancel" href="/drivers">Anuluj</a>
+                <% } else { %>
+                    <a class="form-button-cancel" href="/drivers">Powrót</a>
+                <% } %>
             </div>
         </form>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="section-buttons">
+                <a href="/drivers/edit/<%= driver._id %>" class="button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+            <h2>
+                Drużyny kierowcy
+            </h2>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Narodowość</th>
+                    <th>Od</th>
+                    <th>Do</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (let team of driver.teams) { %>
+                <tr>
+                    <td><a href="/teams/details/<%= team._id %>"><%= team.name %></a></td>
+                    <td><%= team.nationality %></td>
+                    <td><%= team.dateFrom.toISOString().split('T')[0] %></td>
+                    <td><%= team.dateTo ? team.dateTo.toISOString().split('T')[0] : 'nieokreślony' %></td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+        <% } %>
+
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <% if (formMode != 'showDetails') { %>
+            <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+            <a class="form-button-cancel" href="/drivers">Anuluj</a>
+            <% } else { %>
+                <a class="form-button-cancel" href="/drivers">Powrót</a>
+            <% } %>
+        </div>
+
     </main>
 <%- include('./../fragments/footer.ejs') %>

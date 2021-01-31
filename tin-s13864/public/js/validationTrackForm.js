@@ -1,9 +1,9 @@
 function validateForm() {
-    const lokalizacjaInput = document.getElementById("lokalizacja");
-    const dlugoscInput = document.getElementById("dlugosc");
+    const lokalizacjaInput = document.getElementById("location");
+    const dlugoscInput = document.getElementById("length");
 
-    const errorLokalizacja = document.getElementById("errorLokalizacja");
-    const errorDlugosc = document.getElementById("errorDlugosc");
+    const errorLokalizacja = document.getElementById("errorLocation");
+    const errorDlugosc = document.getElementById("errorLength");
     const errorsSummary = document.getElementById("errorsSummary");
 
     resetErrors([lokalizacjaInput, dlugoscInput], [errorLokalizacja, errorDlugosc], errorsSummary);

@@ -65,6 +65,10 @@ exports.updateTrack = (trackId, trackData) => {
 };
 
 exports.deleteTrack = (trackId) => {
-    const sql = 'DELETE FROM Track where _id = ?';
-    return db.promise().execute(sql, [trackId]);
+    const sql1 = 'DELETE FROM Race where track_id = ?';
+    const sql2 = 'DELETE FROM Track where _id = ?';
+    return db.promise().execute(sql1, [trackId])
+        .then(() => {
+            return db.promise().execute(sql2, [trackId])
+        });
 };
