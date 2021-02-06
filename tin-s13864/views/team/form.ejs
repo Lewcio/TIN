@@ -1,0 +1,87 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <script type="application/javascript" src="/js/validationTeamForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%= formAction %>" novalidate onsubmit="return validateForm();">
+            <input type="hidden" name="_id" value="<%= team._id %>">
+
+            <label for="name">Nazwa<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="name" id="name" placeholder="2-60 znaków" value="<%= team.name ? team.name : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('name')) ? 'error-input' : '' %>" />
+            <span id="errorName" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('name'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('name')).message %>
+                <% } %>
+            </span>
+
+            <label for="nationality">Narodowość<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="nationality" id="nationality" placeholder="2-60 znaków" value="<%= team.nationality ? team.nationality : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('nationality')) ? 'error-input' : '' %>" />
+            <span id="errorNationality" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('nationality'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('nationality')).message %>
+                <% } %>
+            </span>
+
+            <label for="dateOfCreate">Data założenia<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="date" name="dateOfCreate" id="dateOfCreate" value="<%= team.dateOfCreate ? team.dateOfCreate.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('dateOfCreate')) ? 'error-input' : '' %>" />
+            <span id="errorDateOfCreate" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('dateOfCreate'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('dateOfCreate')).message %>
+                <% } %>
+            </span>
+
+            <label for="colors">Kolory<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="colors" id="colors" placeholder="2-60 znaków" value="<%= team.colors ? team.colors : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('colors')) ? 'error-input' : '' %>" />
+            <span id="errorColors" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('colors'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('colors')).message %>
+                <% } %>
+            </span>
+
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <% if (formMode != 'showDetails') { %>
+                    <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+                    <a class="form-button-cancel" href="/teams">Anuluj</a>
+                <% } else { %>
+                    <a class="form-button-cancel" href="/teams">Powrót</a>
+                <% } %>
+            </div>
+        </form>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="section-buttons">
+                <a href="/teams/edit/<%= team._id %>" class="button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+            <h2>
+                Kierowcy
+            </h2>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Data urodzenia</th>
+                    <th>Narodowość</th>
+                    <th>Od</th>
+                    <th>Do</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (let driver of team.drivers) { %>
+                <tr>
+                    <td><a href="/drivers/details/<%= driver._id %>"><%= driver.firstName %></a></td>
+                    <td><%= driver.lastName %></td>
+                    <td><%= driver.dateOfBirth.toISOString().split('T')[0] %></td>
+                    <td><%= driver.nationality %></td>
+                    <td><%= driver.dateFrom.toISOString().split('T')[0] %></td>
+                    <td><%= driver.dateTo ? driver.dateTo.toISOString().split('T')[0] : 'nieokreślony' %></td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+        <% } %>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

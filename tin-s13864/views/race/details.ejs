@@ -1,0 +1,34 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <h2>Szczegóły wyścigu</h2>
+        <form class="form">
+            <label for="data">Data</label>
+            <input type="date" name="data" id="data" value="29.10" disabled />
+            <span id="errorData" class="errors-text"></span>
+
+            <label for="okrazenia">Okrążenia</label>
+            <input type="text" name="okrazenia" id="okrazenia" value="44" disabled />
+            <span id="errorData" class="errors-text"></span>
+
+            <div class="form-buttons">
+                <a href="" class="list-actions-button-edit">Edytuj</a>
+                <a href="" class="list-actions-button-details">Powrót</a>
+            </div>
+        </form>
+        <h2>Szczegóły toru</h2>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>Lokalizacja</th>
+                <th>Długość</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Circuit de Spa-Francorchamps</td>
+                <td>7.004 km</td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

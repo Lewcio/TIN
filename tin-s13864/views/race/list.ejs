@@ -1,0 +1,38 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <h2>Wyścigi</h2>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Data</th>
+                <th>Okrążenia</th>
+                <th>Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let race of races) { %>
+            <tr>
+                <td><%= race.name %></td>
+                <td><%= race.date.toISOString().split('T')[0] %></td>
+                <td><%= race.laps %></td>
+                <td>
+                    <ul class="list-actions">
+                        <li>
+                            <a href="/races/details/<%=race._id%>" class="list-actions-button-details">Szczegóły</a>
+                        </li>
+                        <li>
+                            <a href="/races/edit/<%=race._id%>" class="list-actions-button-edit">Edytuj</a>
+                        </li>
+                        <li>
+                            <a href="/races/delete/<%=race._id%>" class="list-actions-button-delete">Usuń</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+        <p><a href="races/add" class="button-add">Dodaj nowy wyścig</a></p>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

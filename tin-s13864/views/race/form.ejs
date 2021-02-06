@@ -1,0 +1,83 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <script type="application/javascript" src="/js/validationRaceForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%= formAction %>" novalidate onsubmit="return validateForm();">
+            <input type="hidden" name="_id" value="<%= race._id %>">
+
+            <label for="name">Nazwa<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="name" id="name" placeholder="2-60 znaków" value="<%= race.name ? race.name : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('name')) ? 'error-input' : '' %>" />
+            <span id="errorName" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('name'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('name')).message %>
+                <% } %>
+            </span>
+
+            <label for="date">Data<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="date" name="date" id="date" value="<%= race.date ? race.date.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('date')) ? 'error-input' : '' %>" />
+            <span id="errorDate" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('date'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('date')).message %>
+                <% } %>
+            </span>
+
+            <label for="laps">Okrążenia<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="laps" id="laps" placeholder="ilość" value="<%= race.laps %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('laps')) ? 'error-input' : '' %>" />
+            <span id="errorLaps" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('laps'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('laps')).message %>
+                <% } %>
+            </span>
+
+            <label for="track">Tor<abbr title="required" aria-label="required">*</abbr></label>
+            <select id="track" name="trackId" required <%= (formMode == 'showDetails') ? 'disabled' : ''%>  class="<%= validationErrors.find(e => e.path.includes('track')) ? 'error-input' : '' %>" >
+                <option value="" selected>--- Wybierz tor ---</option>
+                <% for (let i = 0; i < allTracks.length; i++) { let track = allTracks[i]; %>
+                <option value="<%= track._id %>" label="<%= track.location %>"
+                        <%= (race._id && track._id.toString() == race.track._id.toString()) ? 'selected' : ''%>></option>
+                <% } %>
+            </select>
+            <span id="errorTrack" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('track'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('track')).message %>
+                <% } %>
+            </span>
+
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <% if (formMode != 'showDetails') { %>
+                    <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+                    <a class="form-button-cancel" href="/races">Anuluj</a>
+                <% } else { %>
+                    <a class="form-button-cancel" href="/races">Powrót</a>
+                <% } %>
+            </div>
+        </form>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="section-buttons">
+                <a href="/races/edit/<%= race._id %>" class="button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+            <h2>
+                Tor
+            </h2>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>Lokalizacja</th>
+                    <th>Długość</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><a href="/tracks/details/<%= race.track._id %>"><%= race.track.location %></a></td>
+                    <td><%= race.track.length %> km</td>
+                </tr>
+                </tbody>
+            </table>
+        <% } %>
+    </main>
+<%- include('./../fragments/footer.ejs') %>

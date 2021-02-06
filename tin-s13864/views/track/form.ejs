@@ -1,0 +1,65 @@
+<%- include('./../fragments/header.ejs') %>
+    <main>
+        <script type="application/javascript" src="/js/validationTrackForm.js"></script>
+        <h2><%= pageTitle %></h2>
+        <form class="form" method="post" action="<%= formAction %>" novalidate onsubmit="return validateForm();">
+            <input type="hidden" name="_id" value="<%= track._id %>">
+
+            <label for="location">Lokalizacja<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="location" id="location" placeholder="2-60 znaków" value="<%= track.location ? track.location : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('location')) ? 'error-input' : '' %>" />
+            <span id="errorLocation" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('location'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('location')).message %>
+                <% } %>
+            </span>
+
+            <label for="length">Długość<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="number" name="length" id="length" placeholder="km" value="<%= track.length ? track.length : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('length')) ? 'error-input' : '' %>" />
+            <span id="errorLength" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('length'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('length')).message %>
+                <% } %>
+            </span>
+
+            <div class="form-buttons">
+                <p id="errorsSummary" class="errors-text"></p>
+                <% if (formMode != 'showDetails') { %>
+                    <input class="form-button-submit" type="submit" value="<%= btnLabel %>" />
+                    <a class="form-button-cancel" href="/tracks">Anuluj</a>
+                <% } else { %>
+                    <a class="form-button-cancel" href="/tracks">Powrót</a>
+                <% } %>
+            </div>
+        </form>
+
+        <% if (formMode == 'showDetails') { %>
+            <div class="section-buttons">
+                <a href="/tracks/edit/<%= track._id %>" class="button-edit">Edytuj</a>
+            </div>
+        <% } %>
+
+        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+            <h2>
+                Wyścigi
+            </h2>
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Data</th>
+                    <th>Okrążenia</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (let race of track.races) { %>
+                    <tr>
+                        <td><a href="/races/details/<%= race._id %>"><%= race.name %></a></td>
+                        <td><%= race.date.toISOString().split('T')[0] %></td>
+                        <td><%= race.laps %></td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        <% } %>
+    </main>
+<%- include('./../fragments/footer.ejs') %>
