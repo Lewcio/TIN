@@ -1,4 +1,5 @@
 const db = require("../../config/mysql2/db");
+const teamSchema = require("../../model/joi/Team");
 
 exports.getTeams = () => {
     return db.promise().query("SELECT * FROM Team")
@@ -57,6 +58,10 @@ exports.getTeamById = (teamId) => {
 };
 
 exports.createTeam = (newTeamData) => {
+    const vRes = teamSchema.validate(newTeamData, { abortEarly: false });
+    if (vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const name = newTeamData.name;
     const nationality = newTeamData.nationality;
     const dateOfCreate = newTeamData.dateOfCreate;
@@ -66,6 +71,10 @@ exports.createTeam = (newTeamData) => {
 };
 
 exports.updateTeam = (teamId, teamData) => {
+    const vRes = teamSchema.validate(teamData, { abortEarly: false });
+    if (vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const name = teamData.name;
     const nationality = teamData.nationality;
     const dateOfCreate = teamData.dateOfCreate;

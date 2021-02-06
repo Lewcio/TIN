@@ -6,26 +6,42 @@
             <input type="hidden" name="_id" value="<%= race._id %>">
 
             <label for="name">Nazwa<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="name" id="name" placeholder="2-60 znaków" value="<%= race.name ? race.name : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
-            <span id="errorName" class="errors-text"></span>
+            <input type="text" name="name" id="name" placeholder="2-60 znaków" value="<%= race.name ? race.name : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('name')) ? 'error-input' : '' %>" />
+            <span id="errorName" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('name'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('name')).message %>
+                <% } %>
+            </span>
 
             <label for="date">Data<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="date" name="date" id="date" value="<%= race.date ? race.date.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
-            <span id="errorDate" class="errors-text"></span>
+            <input type="date" name="date" id="date" value="<%= race.date ? race.date.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('date')) ? 'error-input' : '' %>" />
+            <span id="errorDate" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('date'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('date')).message %>
+                <% } %>
+            </span>
 
             <label for="laps">Okrążenia<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="laps" id="laps" placeholder="ilość" value="<%= race.laps %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
-            <span id="errorLaps" class="errors-text"></span>
+            <input type="text" name="laps" id="laps" placeholder="ilość" value="<%= race.laps %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('laps')) ? 'error-input' : '' %>" />
+            <span id="errorLaps" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('laps'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('laps')).message %>
+                <% } %>
+            </span>
 
             <label for="track">Tor<abbr title="required" aria-label="required">*</abbr></label>
-            <select id="track" name="trackId" required <%= (formMode == 'showDetails') ? 'disabled' : ''%> >
+            <select id="track" name="trackId" required <%= (formMode == 'showDetails') ? 'disabled' : ''%>  class="<%= validationErrors.find(e => e.path.includes('track')) ? 'error-input' : '' %>" >
                 <option value="" selected>--- Wybierz tor ---</option>
                 <% for (let i = 0; i < allTracks.length; i++) { let track = allTracks[i]; %>
                 <option value="<%= track._id %>" label="<%= track.location %>"
                         <%= (race._id && track._id.toString() == race.track._id.toString()) ? 'selected' : ''%>></option>
                 <% } %>
             </select>
-            <span id="errorTrack" class="errors-text"></span>
+            <span id="errorTrack" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('track'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('track')).message %>
+                <% } %>
+            </span>
 
             <div class="form-buttons">
                 <p id="errorsSummary" class="errors-text"></p>

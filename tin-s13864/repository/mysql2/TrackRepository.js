@@ -1,4 +1,5 @@
 const db = require("../../config/mysql2/db");
+const trackSchema = require("../../model/joi/Track");
 
 exports.getTracks = () => {
     return db.promise().query("SELECT * FROM Track")
@@ -51,6 +52,10 @@ exports.getTrackById = (trackId) => {
 };
 
 exports.createTrack = (newTrackData) => {
+    const vRes = trackSchema.validate(newTrackData, { abortEarly: false });
+    if (vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const location = newTrackData.location;
     const length = newTrackData.length;
     const sql = `INSERT into Track (location, length) VALUES (?, ?)`;
@@ -58,6 +63,10 @@ exports.createTrack = (newTrackData) => {
 };
 
 exports.updateTrack = (trackId, trackData) => {
+    const vRes = trackSchema.validate(trackData, { abortEarly: false });
+    if (vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const location = trackData.location;
     const length = trackData.length;
     const sql = `UPDATE Track set location = ?, length = ?, where _id = ?`;

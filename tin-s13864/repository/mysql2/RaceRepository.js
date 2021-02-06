@@ -1,4 +1,5 @@
 const db = require("../../config/mysql2/db");
+const raceSchema = require("../../model/joi/Race");
 
 exports.getRaces = () => {
     return db.promise().query("SELECT * FROM Race")
@@ -48,6 +49,10 @@ exports.getRaceById = (raceId) => {
 };
 
 exports.createRace = (newRaceData) => {
+    const vRes = raceSchema.validate(newRaceData, { abortEarly: false });
+    if (vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const name = newRaceData.name;
     const date = newRaceData.date;
     const laps = newRaceData.laps;
@@ -57,6 +62,10 @@ exports.createRace = (newRaceData) => {
 };
 
 exports.updateRace = (raceId, raceData) => {
+    const vRes = raceSchema.validate(raceData, { abortEarly: false });
+    if (vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const name = raceData.name;
     const date = raceData.date;
     const laps = raceData.laps;

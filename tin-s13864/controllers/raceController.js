@@ -21,7 +21,8 @@ exports.showAddRaceForm = (req, res, next) => {
                 formMode: 'createNew',
                 btnLabel: 'Dodaj wyścig',
                 formAction: '/races/add',
-                navLocation: 'race'
+                navLocation: 'race',
+                validationErrors: []
             });
         });
 };
@@ -42,7 +43,8 @@ exports.showEditRaceForm = (req, res, next) => {
                 pageTitle: 'Edycja wyścigu',
                 btnLabel: 'Edytuj wyścig',
                 formAction: '/races/edit',
-                navLocation: 'race'
+                navLocation: 'race',
+                validationErrors: []
             });
         });
 };
@@ -62,25 +64,60 @@ exports.showRaceDetails = (req, res, next) => {
                 formMode: 'showDetails',
                 pageTitle: 'Szczegóły wyścigu',
                 formAction: '',
-                navLocation: 'race'
+                navLocation: 'race',
+                validationErrors: []
             });
         });
 };
 
 exports.addRace = (req, res, next) => {
     const raceData = { ...req.body };
-    RaceRepository.createRace(raceData)
+    let allTracks;
+    TrackRepository.getTracks()
+        .then(tracks => {
+            allTracks = tracks
+            return RaceRepository.createRace(raceData);
+        })
         .then(result => {
             res.redirect('/races');
+        })
+        .catch(err => {
+            res.render('race/form', {
+                race: raceData,
+                allTracks: allTracks,
+                pageTitle: 'Nowy wyścig',
+                formMode: 'createNew',
+                btnLabel: 'Dodaj wyścig',
+                formAction: '/races/add',
+                navLocation: 'race',
+                validationErrors: err.details
+            });
         });
 };
 
 exports.updateRace = (req, res, next) => {
     const raceId = req.body._id;
     const raceData = { ...req.body };
-    RaceRepository.updateRace(raceId, raceData)
+    let allTracks;
+    TrackRepository.getTracks()
+        .then(tracks => {
+            allTracks = tracks
+            return RaceRepository.updateRace(raceId, raceData);
+        })
         .then(result => {
             res.redirect('/races');
+        })
+        .catch(err => {
+            res.render('race/form', {
+                race: raceData,
+                allTracks: allTracks,
+                formMode: 'edit',
+                pageTitle: 'Edycja wyścigu',
+                btnLabel: 'Edytuj wyścig',
+                formAction: '/races/edit',
+                navLocation: 'race',
+                validationErrors: err.details
+            });
         });
 };
 

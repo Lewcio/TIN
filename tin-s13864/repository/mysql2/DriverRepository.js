@@ -1,4 +1,5 @@
 const db = require("../../config/mysql2/db");
+const driverSchema = require("../../model/joi/Driver");
 
 exports.getDrivers = () => {
     return db.promise().query("SELECT * FROM Driver")
@@ -57,6 +58,10 @@ exports.getDriverById = (driverId) => {
 };
 
 exports.createDriver = (newDriverData) => {
+    const vRes = driverSchema.validate(newDriverData, { abortEarly: false });
+    if (vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const firstName = newDriverData.firstName;
     const lastName = newDriverData.lastName;
     const dateOfBirth = newDriverData.dateOfBirth;
@@ -66,6 +71,10 @@ exports.createDriver = (newDriverData) => {
 };
 
 exports.updateDriver = (driverId, driverData) => {
+    const vRes = driverSchema.validate(driverData, { abortEarly: false });
+    if (vRes.error) {
+        return Promise.reject(vRes.error);
+    }
     const firstName = driverData.firstName;
     const lastName = driverData.lastName;
     const dateOfBirth = driverData.dateOfBirth;

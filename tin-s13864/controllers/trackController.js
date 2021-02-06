@@ -17,7 +17,8 @@ exports.showAddTrackForm = (req, res, next) => {
         formMode: 'createNew',
         btnLabel: 'Dodaj tor',
         formAction: '/tracks/add',
-        navLocation: 'track'
+        navLocation: 'track',
+        validationErrors: []
     });
 }
 
@@ -31,7 +32,8 @@ exports.showEditTrackForm = (req, res, next) => {
                 pageTitle: 'Edycja toru',
                 btnLabel: 'Edytuj tor',
                 formAction: '/tracks/edit',
-                navLocation: 'track'
+                navLocation: 'track',
+                validationErrors: []
             });
         });
 };
@@ -45,7 +47,8 @@ exports.showTrackDetails = (req, res, next) => {
                 formMode: 'showDetails',
                 pageTitle: 'Szczegóły toru',
                 formAction: '',
-                navLocation: 'track'
+                navLocation: 'track',
+                validationErrors: []
             });
         });
 }
@@ -55,6 +58,17 @@ exports.addTrack = (req, res, next) => {
     TrackRepository.createTrack(trackData)
         .then(result => {
             res.redirect('/tracks');
+        })
+        .catch(err => {
+            res.render('track/form', {
+                track: trackData,
+                pageTitle: 'Nowy ror',
+                formMode: 'createNew',
+                btnLabel: 'Dodaj tor',
+                formAction: '/tracks/add',
+                navLocation: 'track',
+                validationErrors: err.details
+            });
         });
 };
 
@@ -64,6 +78,17 @@ exports.updateTrack = (req, res, next) => {
     TrackRepository.updateTrack(trackId, trackData)
         .then(result => {
             res.redirect('/tracks');
+        })
+        .catch(err => {
+            res.render('team/form', {
+                track: trackData,
+                formMode: 'edit',
+                pageTitle: 'Edycja toru',
+                btnLabel: 'Edytuj tor',
+                formAction: '/tracks/edit',
+                navLocation: 'track',
+                validationErrors: err.details
+            });
         });
 };
 

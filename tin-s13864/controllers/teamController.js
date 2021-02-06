@@ -17,7 +17,8 @@ exports.showAddTeamForm = (req, res, next) => {
         formMode: 'createNew',
         btnLabel: 'Dodaj drużynę',
         formAction: '/teams/add',
-        navLocation: 'team'
+        navLocation: 'team',
+        validationErrors: []
     });
 };
 
@@ -31,7 +32,8 @@ exports.showEditTeamForm = (req, res, next) => {
                 pageTitle: 'Edycja drużyny',
                 btnLabel: 'Edytuj drużynę',
                 formAction: '/teams/edit',
-                navLocation: 'team'
+                navLocation: 'team',
+                validationErrors: []
             });
         });
 };
@@ -45,16 +47,28 @@ exports.showTeamDetails = (req, res, next) => {
                 formMode: 'showDetails',
                 pageTitle: 'Szczegóły drużyny',
                 formAction: '',
-                navLocation: 'team'
+                navLocation: 'team',
+                validationErrors: []
             });
         });
 };
 
 exports.addTeam = (req, res, next) => {
-    const teamData = { ...req.body };
+    const teamData = {...req.body};
     TeamRepository.createTeam(teamData)
         .then(result => {
             res.redirect('/teams');
+        })
+        .catch(err => {
+            res.render('team/form', {
+                team: teamData,
+                pageTitle: 'Nowa drużyna',
+                formMode: 'createNew',
+                btnLabel: 'Dodaj drużynę',
+                formAction: '/teams/add',
+                navLocation: 'team',
+                validationErrors: err.details
+            });
         });
 };
 
@@ -64,6 +78,17 @@ exports.updateTeam = (req, res, next) => {
     TeamRepository.updateTeam(teamId, teamData)
         .then(result => {
             res.redirect('/teams');
+        })
+        .catch(err => {
+            res.render('team/form', {
+                team: teamData,
+                formMode: 'edit',
+                pageTitle: 'Edycja drużyny',
+                btnLabel: 'Edytuj drużynę',
+                formAction: '/teams/edit',
+                navLocation: 'team',
+                validationErrors: err.details
+            });
         });
 };
 

@@ -6,20 +6,36 @@
             <input type="hidden" name="_id" value="<%= team._id %>">
 
             <label for="name">Nazwa<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="name" id="name" placeholder="2-60 znaków" value="<%= team.name ? team.name : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
-            <span id="errorName" class="errors-text"></span>
+            <input type="text" name="name" id="name" placeholder="2-60 znaków" value="<%= team.name ? team.name : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('name')) ? 'error-input' : '' %>" />
+            <span id="errorName" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('name'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('name')).message %>
+                <% } %>
+            </span>
 
             <label for="nationality">Narodowość<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="nationality" id="nationality" placeholder="2-60 znaków" value="<%= team.nationality ? team.nationality : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
-            <span id="errorNationality" class="errors-text"></span>
+            <input type="text" name="nationality" id="nationality" placeholder="2-60 znaków" value="<%= team.nationality ? team.nationality : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('nationality')) ? 'error-input' : '' %>" />
+            <span id="errorNationality" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('nationality'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('nationality')).message %>
+                <% } %>
+            </span>
 
             <label for="dateOfCreate">Data założenia<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="date" name="dateOfCreate" id="dateOfCreate" value="<%= team.dateOfCreate ? team.dateOfCreate.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
-            <span id="errorDateOfCreate" class="errors-text"></span>
+            <input type="date" name="dateOfCreate" id="dateOfCreate" value="<%= team.dateOfCreate ? team.dateOfCreate.toISOString().split('T')[0] : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('dateOfCreate')) ? 'error-input' : '' %>" />
+            <span id="errorDateOfCreate" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('dateOfCreate'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('dateOfCreate')).message %>
+                <% } %>
+            </span>
 
             <label for="colors">Kolory<abbr title="required" aria-label="required">*</abbr></label>
-            <input type="text" name="colors" id="colors" placeholder="2-60 znaków" value="<%= team.colors ? team.colors : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
-            <span id="errorColors" class="errors-text"></span>
+            <input type="text" name="colors" id="colors" placeholder="2-60 znaków" value="<%= team.colors ? team.colors : '' %>" <%= (formMode == 'showDetails') ? 'disabled' : '' %> class="<%= validationErrors.find(e => e.path.includes('colors')) ? 'error-input' : '' %>" />
+            <span id="errorColors" class="errors-text">
+                <% if (validationErrors.find(e => e.path.includes('colors'))) { %>
+                    <%= validationErrors.find(e => e.path.includes('colors')).message %>
+                <% } %>
+            </span>
 
             <div class="form-buttons">
                 <p id="errorsSummary" class="errors-text"></p>
@@ -40,7 +56,7 @@
 
         <% if (formMode == 'showDetails' || formMode == 'edit') { %>
             <h2>
-                Tor
+                Kierowcy
             </h2>
             <table class="table-list">
                 <thead>
