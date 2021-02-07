@@ -75,18 +75,13 @@ exports.addDriver = (req, res, next) => {
 exports.updateDriver = (req, res, next) => {
     const driverId = req.body._id;
     const driverData = { ...req.body };
-    let driver;
-    DriverRepository.getDriverById(driverId)
-        .then(driverData => {
-            driver = driverData
-            return DriverRepository.updateDriver(driverId, driverData)
-        })
+    DriverRepository.updateDriver(driverId, driverData)
         .then(result => {
             res.redirect('/drivers');
         })
         .catch(err => {
             res.render('driver/form', {
-                driver: driver,
+                driver: driverData,
                 formMode: 'edit',
                 pageTitle: 'Edycja kierowcy',
                 btnLabel: 'Edytuj kierowcę',

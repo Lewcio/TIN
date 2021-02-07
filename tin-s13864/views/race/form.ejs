@@ -54,13 +54,13 @@
             </div>
         </form>
 
-        <% if (formMode == 'showDetails') { %>
+        <% if (formMode == 'showDetails' && loggedUser) { %>
             <div class="section-buttons">
                 <a href="/races/edit/<%= race._id %>" class="button-edit">Edytuj</a>
             </div>
         <% } %>
 
-        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+        <% if ((formMode == 'showDetails' || formMode == 'edit') && race.track ) { %>
             <h2>
                 Tor
             </h2>

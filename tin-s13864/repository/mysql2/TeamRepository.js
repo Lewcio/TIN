@@ -84,7 +84,7 @@ exports.updateTeam = (teamId, teamData) => {
 };
 
 exports.deleteTeam = (teamId) => {
-    const sql1 = 'DELETE FROM Driver where team_id = ?';
+    const sql1 = 'DELETE FROM Contract where team_id = ?';
     const sql2 = 'DELETE FROM Team where _id = ?';
     return db.promise().execute(sql1, [teamId])
         .then(() => {

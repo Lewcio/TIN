@@ -108,6 +108,24 @@ main h2 {
     padding: 0.25rem 0.5rem;
 }
 
+.section-buttons {
+    border-top: 1px solid #7f8c8d;
+    margin: 2em 0;
+    padding: 2em 2em;
+}
+
+.button-edit {
+    margin: auto;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.8rem;
+    width: 100%;
+}
+
 .list-actions-button-details,
 .list-actions-button-edit,
 .list-actions-button-delete,
@@ -137,11 +155,11 @@ main h2 {
 }
 
 /* Przycisk Edycja */
-.list-actions-button-edit {
+.list-actions-button-edit, .button-edit {
     background-color: #f39c12;
 }
 
-.list-actions-button-edit:hover {
+.list-actions-button-edit:hover, .button-edit:hover {
     background-color: #f1c40f;
 }
 

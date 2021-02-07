@@ -48,7 +48,7 @@
             </div>
         </form>
 
-        <% if (formMode == 'showDetails') { %>
+        <% if (formMode == 'showDetails' && loggedUser) { %>
             <div class="section-buttons">
                 <a href="/drivers/edit/<%= driver._id %>" class="button-edit">Edytuj</a>
             </div>

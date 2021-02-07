@@ -84,6 +84,10 @@ exports.updateDriver = (driverId, driverData) => {
 };
 
 exports.deleteDriver = (driverId) => {
-    const sql = 'DELETE FROM Driver where _id = ?';
-    return db.promise().execute(sql, [driverId]);
+    const sql1 = 'DELETE FROM Contract where driver_id = ?';
+    const sql2 = 'DELETE FROM Driver where _id = ?';
+    return db.promise().execute(sql1, [driverId])
+        .then(() => {
+            return db.promise().execute(sql2, [driverId])
+        });
 };

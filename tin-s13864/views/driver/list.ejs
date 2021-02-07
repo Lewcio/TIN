@@ -23,18 +23,22 @@
                         <li>
                             <a href="/drivers/details/<%=driver._id%>" class="list-actions-button-details">Szczegóły</a>
                         </li>
+                        <% if(loggedUser) { %>
                         <li>
                             <a href="/drivers/edit/<%=driver._id%>" class="list-actions-button-edit">Edytuj</a>
                         </li>
                         <li>
                             <a href="/drivers/delete/<%=driver._id%>" class="list-actions-button-delete">Usuń</a>
                         </li>
+                        <% } %>
                     </ul>
                 </td>
             </tr>
             <% } %>
             </tbody>
         </table>
+        <% if(loggedUser) { %>
         <p><a href="drivers/add" class="button-add">Dodaj nowego kierowcę</a></p>
+        <% } %>
     </main>
 <%- include('./../fragments/footer.ejs') %>

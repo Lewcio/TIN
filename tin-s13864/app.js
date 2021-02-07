@@ -13,6 +13,7 @@ const driverApiRouter = require('./routes/api/DriverApiRoute');
 const raceApiRouter = require('./routes/api/RaceApiRoute');
 const teamApiRouter = require('./routes/api/TeamApiRoute');
 const trackApiRouter = require('./routes/api/TrackApiRoute');
+const session = require('express-session');
 
 var app = express();
 
@@ -25,6 +26,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'my_secret_password',
+  resave: false
+}));
+app.use((req, res, next) => {
+  const loggedUser = req.session.loggedUser;
+  res.locals.loggedUser = loggedUser;
+  if(!res.locals.loginError) {
+    res.locals.loginError = undefined;
+  }
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/drivers', driverRouter);

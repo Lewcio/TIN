@@ -32,7 +32,7 @@
             </div>
         </form>
 
-        <% if (formMode == 'showDetails') { %>
+        <% if (formMode == 'showDetails' && loggedUser) { %>
             <div class="section-buttons">
                 <a href="/tracks/edit/<%= track._id %>" class="button-edit">Edytuj</a>
             </div>

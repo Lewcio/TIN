@@ -44,7 +44,7 @@ const raceSchema = Joi.object({
         .min(0)
         .required()
         .error(errMessages),
-    track: Joi.string()
+    trackId: Joi.string()
         .required()
         .error(errMessages)
 });

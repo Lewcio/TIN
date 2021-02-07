@@ -13,7 +13,7 @@ exports.showTrackList = (req, res, next) => {
 exports.showAddTrackForm = (req, res, next) => {
     res.render('track/form', {
         track: {},
-        pageTitle: 'Nowy ror',
+        pageTitle: 'Nowy tor',
         formMode: 'createNew',
         btnLabel: 'Dodaj tor',
         formAction: '/tracks/add',
@@ -26,7 +26,7 @@ exports.showEditTrackForm = (req, res, next) => {
     const trackId = req.params.trackId;
     TrackRepository.getTrackById(trackId)
         .then(track => {
-            res.render('team/form', {
+            res.render('track/form', {
                 track: track,
                 formMode: 'edit',
                 pageTitle: 'Edycja toru',
@@ -80,7 +80,7 @@ exports.updateTrack = (req, res, next) => {
             res.redirect('/tracks');
         })
         .catch(err => {
-            res.render('team/form', {
+            res.render('track/form', {
                 track: trackData,
                 formMode: 'edit',
                 pageTitle: 'Edycja toru',
