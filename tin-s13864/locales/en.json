@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "main-page": "Strona główna",
+    "drivers": "Kierowcy",
+    "teams": "Drużyny",
+    "races": "Wyścigi",
+    "tracks": "Tory"
+  },
+  "main-page": {
+    "content": "Strona główna",
+    "title": "Logowanie",
+    "login": "Login",
+    "password": "Hasło",
+    "loginInfo": "Jesteś zalogowany jako",
+    "logout": "Wyloguj się"
+  },
+  "list": {
+    "actions": {
+      "title": "Akcje",
+      "details": "Akcje",
+      "edit": "Edytuj",
+      "delete": "Usuń"
+    }
+  },
+  "form": {
+    "actions": {
+      "return": "Powrót",
+      "edit": "Edytuj",
+      "cancel": "Anuluj"
+    }
+  },
+  "driver": {
+    "fields": {
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "dateOfBirth": "Data urodzenia",
+      "nationality": "Narodowość"
+    },
+    "list": {
+      "title": "Kierowcy",
+      "addNew": "Dodaj nowego kierowcę",
+      "noData": "Brak kierowców w bazie",
+      "pageTitle": "Lista kierowców"
+    },
+    "form": {
+      "teams": "Drużyny kierowcy",
+      "add": {
+        "pageTitle": "Nowy kierowca",
+        "btnLabel": "Dodaj kierowcę",
+        "confirm": {
+          "header": "Potwierdzenie operacji",
+          "text": "Pomyślnie dodano kierowcę"
+        }
+      },
+      "edit": {
+        "pageTitle": "Edycja kierowcy",
+        "btnLabel": "Edytuj kierowcę",
+        "confirm": {
+          "header": "Potwierdzenie operacji",
+          "text": "Pomyślnie zaktualizowano kierowcę"
+        }
+      }
+    }
+  }
+}

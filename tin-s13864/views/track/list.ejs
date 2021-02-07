@@ -19,18 +19,22 @@
                         <li>
                             <a href="/tracks/details/<%=track._id%>" class="list-actions-button-details">Szczegóły</a>
                         </li>
+                        <% if(loggedUser) { %>
                         <li>
                             <a href="/tracks/edit/<%=track._id%>" class="list-actions-button-edit">Edytuj</a>
                         </li>
                         <li>
                             <a href="/tracks/delete/<%=track._id%>" class="list-actions-button-delete">Usuń</a>
                         </li>
+                        <% } %>
                     </ul>
                 </td>
             </tr>
             <% } %>
             </tbody>
         </table>
+        <% if(loggedUser) { %>
         <p><a href="tracks/add" class="button-add">Dodaj nowy tor</a></p>
+        <% } %>
     </main>
 <%- include('./../fragments/footer.ejs') %>

@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS `tin-f1`.`Race` (
 
 CREATE TABLE IF NOT EXISTS `tin-f1`.`User` (
     `_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `email` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(50) NOT NULL,
+    `login` VARCHAR(50) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`_id`),
     UNIQUE INDEX `user_id_UNIQUE` (`_id` ASC)
 ) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
@@ -89,4 +89,8 @@ INSERT IGNORE INTO `tin-f1`.`Contract` (`_id`, `driver_id`, `team_id`, `dateFrom
     (2, 2, 2, '2021-01-01', '2023-12-31'),
     (3, 3, 2, '2017-01-01', '2012-12-31'),
     (4, 3, 3, '2013-01-01', null)
+;
+
+INSERT IGNORE INTO `tin-f1`.`User` (`_id`, `login`, `password`) VALUES
+    (1, 'admin', '$2a$08$vswIVEV4TPoXzlA8mtnh8uSxV7nG8Bi36fZ2eEcOm5mw2snIqnM9y')
 ;

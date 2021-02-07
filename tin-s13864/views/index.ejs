@@ -1,6 +1,23 @@
 <%- include('./fragments/header.ejs') %>
     <main>
         <h2>Strona główna</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <% if(!loggedUser) { %>
+            <div id="login">
+                <h5>Logowanie</h5>
+                <form method="post" action="/login" novalidate>
+                    <p><label for="login">Login:</label> <br />
+                    <input type="text" id="login" name="login"></p>
+
+                    <p><label for="loginPassword">Hasło:</label><br />
+                    <input type="password" id="loginPassword" name="password"></p>
+
+                    <p><input type="submit" value="Zaloguj się"><br />
+                    <span id="loginErrors"><%= loginError ? loginError : ''%></span></p>
+                </form>
+            </div>
+        <% } else { %>
+        <p><span>Jesteś zalogowany jako: <%=loggedUser.login%></span><br />
+        <a href="/logout">Wyloguj się</a></p>
+        <% } %>
     </main>
 <%- include('./fragments/footer.ejs') %>
